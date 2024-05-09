@@ -1,18 +1,27 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+// Home page route
 Route::get('/', function () {
-    return ('Routa home');
+    return view('home'); 
 });
+
+// Blog page route
 Route::get('/blog', function () {
-    return ('listado de publicaciones');
+    $posts = [  // Corrected array syntax
+        ['id' => 1, 'title' => 'PHP', 'slug' => 'php'],
+        ['id' => 2, 'title' => 'Laravel', 'slug' => 'laravel'],
+        ['id' => 3, 'title' => 'PHP', 'slug' => 'php'],
+    ];
+    return view('blog', ['posts' => $posts]); 
 });
+
+// Single post page route
 Route::get('blog/{slug}', function ($slug) {
-    return $slug;
+    $post = ['slug' => $slug]; 
+    return view('post', ['post' => $post]); 
 });
-Route::get('buscar', function (Request $request) {
-    return $request->all();
-});
+
+
 
